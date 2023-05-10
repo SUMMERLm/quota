@@ -1,2 +1,1 @@
-# quota
-serverless quota control
+serverless quota controller
