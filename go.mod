@@ -1,8 +1,9 @@
-module github.com/SUMMERLm/serverlessquota
+module github.com/SUMMERLm/quota
 
-go 1.17
+go 1.19
 
 require (
+	github.com/SUMMERLm/serverlessquota v0.0.0-20230509085235-a33a1e6868f4
 	k8s.io/apimachinery v0.27.1
 	k8s.io/client-go v0.27.1
 	k8s.io/code-generator v0.27.1
