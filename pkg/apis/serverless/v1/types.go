@@ -23,57 +23,33 @@ import (
 // +genclient
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
-//+kubebuilder:object:root=true
-//+kubebuilder:subresource:status
-
-// Quota is the Schema for the quotas API
+// Quota is a specification for a Serverless Quotaresource
 type Quota struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 
-	Spec   QuotaSpec   `json:"spec,omitempty"`
-	Status QuotaStatus `json:"status,omitempty"`
+	Spec QuotaSpec `json:"spec"`
 }
 
-// QuotaStatus defines the observed state of Quota
-type QuotaStatus struct {
-	// INSERT ADDITIONAL STATUS FIELD - define observed state of cluster
-	// Important: Run "make" to regenerate code after modifying this file
-}
-
-// QuotaSpec defines the desired state of Quota
+// QuotaSpec is the spec for a Foo resource
 type QuotaSpec struct {
-	// INSERT ADDITIONAL SPEC FIELDS - desired state of cluster
-	// Important: Run "make" to regenerate code after modifying this file
-
-	// Quota is an example field of Quota. Edit quota_types.go to remove/update
-	// +optional
 	SupervisorName string `json:"supervisorName,omitempty"`
-	// +required
 	LocalName string `json:"localName,omitempty"`
-	// +optional
 	NetworkRegister map[string]string `json:"networkRegister,omitempty"`
-	// +optional
 	ChildName []string `json:"childName,omitempty"`
-	// +optional
 	ChildAlert map[string]bool `json:"childAlert,omitempty"`
-	// +optional
 	ClusterAreaType string `json:"clusterAreaType,omitempty"`
-	// +optional
 	PodQpsQuota map[string]int `json:"podQpsQuota,omitempty"`
-	// +optional
 	PodQpsReal map[string]int `json:"podQpsReal,omitempty"`
-	// +optional
 	PodQpsIncreaseOrDecrease map[string]int `json:"podQpsIncreaseOrDecrease,omitempty"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
-//+kubebuilder:object:root=true
-
-// QuotaList contains a list of Quota
+// QuotaList is a list of Foo resources
 type QuotaList struct {
 	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
-	Items           []Quota `json:"items"`
+	metav1.ListMeta `json:"metadata"`
+
+	Items []Quota `json:"items"`
 }

@@ -23,12 +23,12 @@ set -o pipefail
 # generate the code with:
 # --output-base    because this script should also be able to run inside the vendor dir of
 #                  k8s.io/kubernetes. The output-base is needed for the generators to output into the vendor dir
-../vendor/k8s.io/code-generator/generate-groups.sh \
+../vendor/k8s.io/code-generator/generate-groups.sh  \
   "deepcopy,client,informer,lister" \
   github.com/SUMMERLm/quota/pkg/generated \
   github.com/SUMMERLm/quota/pkg/apis \
   serverless:v1 \
-  --go-header-file /root/go/src/github.com/SUMMERLm/quota/hack/boilerplate.go.txt \
+  --go-header-file /root/go/src/github.com/SUMMERLm/quota/hack/boilerplate.go.txt  -v 10 \
   --output-base /root/go/src
 
 # To use your own boilerplate text append:
