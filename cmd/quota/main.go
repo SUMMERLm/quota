@@ -12,11 +12,11 @@ import (
 	"time"
 )
 
-//var (
-//	masterURL        string
-//	kubeconfig       string
-//	kubeParentConfig string
-//)
+var (
+	masterURL        string
+	kubeconfig       string
+	kubeParentConfig string
+)
 
 func main() {
 	klog.InitFlags(nil)
@@ -25,10 +25,10 @@ func main() {
 	// set up signals so we handle the first shutdown signal gracefully
 	stopCh := signals.SetupSignalHandler()
 
-	//cfg, err := clientcmd.BuildConfigFromFlags(masterURL, kubeconfig)
-	//parentCfg, err := clientcmd.BuildConfigFromFlags(masterURL, kubeParentConfig)
-	cfg, err := clientcmd.BuildConfigFromFlags("", "/conf/quota/config")
-	parentCfg, err := clientcmd.BuildConfigFromFlags("", "/conf/quota/parentConfig")
+	cfg, err := clientcmd.BuildConfigFromFlags(masterURL, kubeconfig)
+	parentCfg, err := clientcmd.BuildConfigFromFlags(masterURL, kubeParentConfig)
+	//cfg, err := clientcmd.BuildConfigFromFlags("", "/conf/quota/config")
+	//parentCfg, err := clientcmd.BuildConfigFromFlags("", "/conf/quota/parentConfig")
 	if err != nil {
 		klog.Fatalf("Error building kubeconfig: %s", err.Error())
 	}
@@ -66,8 +66,8 @@ func main() {
 	}
 }
 
-//func init() {
-//	//flag.StringVar(&kubeconfig, "kubeconfig", "", "Path to a kubeconfig. Only required if out-of-cluster.")
-//	//flag.StringVar(&kubeParentConfig, "kubeParentConfig", "", "Path to a kubeParentConfig. Only required if out-of-cluster.")
-//	flag.StringVar(&masterURL, "master", "", "The address of the Kubernetes API server. Overrides any value in kubeconfig. Only required if out-of-cluster.")
-//}
+func init() {
+	flag.StringVar(&kubeconfig, "kubeconfig", "", "Path to a kubeconfig. Only required if out-of-cluster.")
+	flag.StringVar(&kubeParentConfig, "kubeParentConfig", "", "Path to a kubeParentConfig. Only required if out-of-cluster.")
+	flag.StringVar(&masterURL, "master", "", "The address of the Kubernetes API server. Overrides any value in kubeconfig. Only required if out-of-cluster.")
+}
