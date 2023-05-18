@@ -1,0 +1,4 @@
+## Append samples of your project ##
+resources:
+- serverless_v1_quota.yaml
+#+kubebuilder:scaffold:manifestskustomizesamples

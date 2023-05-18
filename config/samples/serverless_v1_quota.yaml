@@ -1,0 +1,12 @@
+apiVersion: serverless.pml.com.cn/v1
+kind: Quota
+metadata:
+  labels:
+    app.kubernetes.io/name: quota
+    app.kubernetes.io/instance: quota-sample
+    app.kubernetes.io/part-of: quota
+    app.kubernetes.io/managed-by: kustomize
+    app.kubernetes.io/created-by: quota
+  name: quota-sample
+spec:
+  # TODO(user): Add fields here
