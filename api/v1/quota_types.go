@@ -78,5 +78,5 @@ type QuotaList struct {
 }
 
 func init() {
-	SchemeBuilder.Register(&Serverless{}, &ServerlessList{})
+	SchemeBuilder.Register(&Quota{}, &QuotaList{})
 }
