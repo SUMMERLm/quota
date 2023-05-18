@@ -48,22 +48,17 @@ type QuotaSpec struct {
 	// +optional
 	LocalName string `json:"localName,omitempty"`
 	// +optional
-	// +mapType=atomic
-	NetworkRegister map[string]string `json:"networkRegister,omitempty"`
-	ChildName       []string          `json:"childName,omitempty"`
+	NetworkRegister string `json:"networkRegister,omitempty"`
+	ChildName       string          `json:"childName,omitempty"`
 	// +optional
-	// +mapType=atomic
-	ChildAlert      map[string]bool `json:"childAlert,omitempty"`
+	ChildAlert      bool `json:"childAlert,omitempty"`
 	ClusterAreaType string          `json:"clusterAreaType,omitempty"`
 	// +optional
-	// +mapType=atomic
-	PodQpsQuota map[string]int `json:"podQpsQuota,omitempty"`
+	PodQpsQuota int `json:"podQpsQuota,omitempty"`
 	// +optional
-	// +mapType=atomic
-	PodQpsReal map[string]int `json:"podQpsReal,omitempty"`
+	PodQpsReal int `json:"podQpsReal,omitempty"`
 	// +optional
-	// +mapType=atomic
-	PodQpsIncreaseOrDecrease map[string]int `json:"podQpsIncreaseOrDecrease,omitempty"`
+	PodQpsIncreaseOrDecrease int `json:"podQpsIncreaseOrDecrease,omitempty"`
 }
 
 //+kubebuilder:object:root=true
