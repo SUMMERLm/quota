@@ -36,21 +36,38 @@ spec:
             description: QuotaSpec is the spec for a Foo resource
             properties:
               childAlert:
-                type: boolean
+                additionalProperties:
+                  type: boolean
+                type: object
+                x-kubernetes-map-type: atomic
               childName:
-                type: string
+                items:
+                  type: string
+                type: array
               clusterAreaType:
                 type: string
               localName:
                 type: string
               networkRegister:
-                type: string
+                additionalProperties:
+                  type: string
+                type: object
+                x-kubernetes-map-type: atomic
               podQpsIncreaseOrDecrease:
-                type: integer
+                additionalProperties:
+                  type: integer
+                type: object
+                x-kubernetes-map-type: atomic
               podQpsQuota:
-                type: integer
+                additionalProperties:
+                  type: integer
+                type: object
+                x-kubernetes-map-type: atomic
               podQpsReal:
-                type: integer
+                additionalProperties:
+                  type: integer
+                type: object
+                x-kubernetes-map-type: atomic
               supervisorName:
                 type: string
             type: object
@@ -60,3 +77,5 @@ spec:
         type: object
     served: true
     storage: true
+    subresources:
+      status: {}
