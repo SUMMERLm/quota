@@ -20,14 +20,14 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
-// +genclient
-// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
-
 // QuotaStatus defines the observed state of SubscriberRule
 type QuotaStatus struct {
 	// INSERT ADDITIONAL STATUS FIELD - define observed state of cluster
 	// Important: Run "make" to regenerate code after modifying this file
 }
+
+//+kubebuilder:object:root=true
+//+kubebuilder:subresource:status
 
 // Quota is a specification for a Serverless Quotaresource
 type Quota struct {
@@ -38,9 +38,6 @@ type Quota struct {
 	Spec   QuotaSpec   `json:"spec,omitempty"`
 }
 
-//+kubebuilder:object:root=true
-//+kubebuilder:subresource:status
-
 // QuotaSpec is the spec for a Foo resource
 type QuotaSpec struct {
 	// +optional
@@ -48,21 +45,25 @@ type QuotaSpec struct {
 	// +optional
 	LocalName string `json:"localName,omitempty"`
 	// +optional
-	NetworkRegister string `json:"networkRegister,omitempty"`
-	ChildName       string          `json:"childName,omitempty"`
+	// +mapType=atomic
+	NetworkRegister map[string]string `json:"networkRegister,omitempty"`
+	ChildName       []string          `json:"childName,omitempty"`
 	// +optional
-	ChildAlert      bool `json:"childAlert,omitempty"`
+	// +mapType=atomic
+	ChildAlert      map[string]bool `json:"childAlert,omitempty"`
 	ClusterAreaType string          `json:"clusterAreaType,omitempty"`
 	// +optional
-	PodQpsQuota int `json:"podQpsQuota,omitempty"`
+	// +mapType=atomic
+	PodQpsQuota map[string]int `json:"podQpsQuota,omitempty"`
 	// +optional
-	PodQpsReal int `json:"podQpsReal,omitempty"`
+	// +mapType=atomic
+	PodQpsReal map[string]int `json:"podQpsReal,omitempty"`
 	// +optional
-	PodQpsIncreaseOrDecrease int `json:"podQpsIncreaseOrDecrease,omitempty"`
+	// +mapType=atomic
+	PodQpsIncreaseOrDecrease map[string]int `json:"podQpsIncreaseOrDecrease,omitempty"`
 }
 
 //+kubebuilder:object:root=true
-// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
 // QuotaList is a list of Quota resources
 type QuotaList struct {
