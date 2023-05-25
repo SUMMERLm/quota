@@ -49,10 +49,14 @@ spec:
               localName:
                 type: string
               networkRegister:
-                additionalProperties:
-                  type: string
-                type: object
-                x-kubernetes-map-type: atomic
+                items:
+                  properties:
+                    clustername:
+                      type: string
+                    scnid:
+                      type: string
+                  type: object
+                type: array
               podQpsIncreaseOrDecrease:
                 additionalProperties:
                   type: integer
