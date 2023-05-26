@@ -46,7 +46,8 @@ type QuotaSpec struct {
 	LocalName string `json:"localName,omitempty"`
 	// +optional
 	NetworkRegister []NetworkRegisterSpec `json:"networkRegister,omitempty"`
-	ChildName       []string          `json:"childName,omitempty"`
+	// +optional
+	ChildName []string `json:"childName,omitempty"`
 	// +optional
 	// +mapType=atomic
 	ChildAlert      map[string]bool `json:"childAlert,omitempty"`
@@ -67,7 +68,6 @@ type NetworkRegisterSpec struct {
 	Scnid string `json:"scnid,omitempty"`
 	// +optional
 	Clustername string `json:"clustername,omitempty"`
-
 }
 
 //+kubebuilder:object:root=true
