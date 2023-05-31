@@ -36,10 +36,14 @@ spec:
             description: QuotaSpec is the spec for a Foo resource
             properties:
               childAlert:
-                additionalProperties:
-                  type: boolean
-                type: object
-                x-kubernetes-map-type: atomic
+                items:
+                  properties:
+                    alert:
+                      type: boolean
+                    clusterName:
+                      type: string
+                  type: object
+                type: array
               childName:
                 items:
                   type: string
@@ -58,20 +62,32 @@ spec:
                   type: object
                 type: array
               podQpsIncreaseOrDecrease:
-                additionalProperties:
-                  type: integer
-                type: object
-                x-kubernetes-map-type: atomic
+                items:
+                  properties:
+                    podName:
+                      type: string
+                    qpsIncreaseOrDecrease:
+                      type: integer
+                  type: object
+                type: array
               podQpsQuota:
-                additionalProperties:
-                  type: integer
-                type: object
-                x-kubernetes-map-type: atomic
+                items:
+                  properties:
+                    podName:
+                      type: string
+                    qpsQuota:
+                      type: integer
+                  type: object
+                type: array
               podQpsReal:
-                additionalProperties:
-                  type: integer
-                type: object
-                x-kubernetes-map-type: atomic
+                items:
+                  properties:
+                    podName:
+                      type: string
+                    qpsReal:
+                      type: integer
+                  type: object
+                type: array
               supervisorName:
                 type: string
             type: object

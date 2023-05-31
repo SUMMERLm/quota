@@ -29,6 +29,8 @@ type QuotaStatus struct {
 //+kubebuilder:object:root=true
 //+kubebuilder:subresource:status
 
+// +genclient
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 // Quota is a specification for a Serverless Quotaresource
 type Quota struct {
 	metav1.TypeMeta   `json:",inline"`
@@ -49,18 +51,15 @@ type QuotaSpec struct {
 	// +optional
 	ChildName []string `json:"childName,omitempty"`
 	// +optional
-	// +mapType=atomic
-	ChildAlert      map[string]bool `json:"childAlert,omitempty"`
-	ClusterAreaType string          `json:"clusterAreaType,omitempty"`
+	ChildAlert []ChildAlertSpec `json:"childAlert,omitempty"`
 	// +optional
-	// +mapType=atomic
-	PodQpsQuota map[string]int `json:"podQpsQuota,omitempty"`
+	ClusterAreaType string `json:"clusterAreaType,omitempty"`
 	// +optional
-	// +mapType=atomic
-	PodQpsReal map[string]int `json:"podQpsReal,omitempty"`
+	PodQpsQuota []PodQpsQuotaSpec `json:"podQpsQuota,omitempty"`
 	// +optional
-	// +mapType=atomic
-	PodQpsIncreaseOrDecrease map[string]int `json:"podQpsIncreaseOrDecrease,omitempty"`
+	PodQpsReal []PodQpsQuotaRealSpec `json:"podQpsReal,omitempty"`
+	// +optional
+	PodQpsIncreaseOrDecrease []PodQpsIncreaseOrDecreaseSpec `json:"podQpsIncreaseOrDecrease,omitempty"`
 }
 
 type NetworkRegisterSpec struct {
@@ -70,7 +69,36 @@ type NetworkRegisterSpec struct {
 	Clustername string `json:"clustername,omitempty"`
 }
 
+type ChildAlertSpec struct {
+	// +optional
+	ClusterName string `json:"clusterName,omitempty"`
+	// +optional
+	Alert bool `json:"alert,omitempty"`
+}
+
+type PodQpsQuotaSpec struct {
+	// +optional
+	PodName string `json:"podName,omitempty"`
+	// +optional
+	QpsQuota int `json:"qpsQuota,omitempty"`
+}
+
+type PodQpsQuotaRealSpec struct {
+	// +optional
+	PodName string `json:"podName,omitempty"`
+	// +optional
+	QpsReal int `json:"qpsReal,omitempty"`
+}
+
+type PodQpsIncreaseOrDecreaseSpec struct {
+	// +optional
+	PodName string `json:"podName,omitempty"`
+	// +optional
+	QpsIncreaseOrDecrease int `json:"qpsIncreaseOrDecrease,omitempty"`
+}
+
 //+kubebuilder:object:root=true
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
 // QuotaList is a list of Quota resources
 type QuotaList struct {
@@ -78,8 +106,4 @@ type QuotaList struct {
 	metav1.ListMeta `json:"metadata"`
 
 	Items []Quota `json:"items"`
-}
-
-func init() {
-	SchemeBuilder.Register(&Quota{}, &QuotaList{})
 }
