@@ -73,6 +73,8 @@ spec:
               podQpsQuota:
                 items:
                   properties:
+                    clusterName:
+                      type: string
                     podName:
                       type: string
                     qpsQuota:

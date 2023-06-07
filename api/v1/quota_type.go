@@ -81,6 +81,8 @@ type PodQpsQuotaSpec struct {
 	PodName string `json:"podName,omitempty"`
 	// +optional
 	QpsQuota int `json:"qpsQuota,omitempty"`
+	// +optional
+	ClusterName string `json:"clusterName,omitempty"`
 }
 
 type PodQpsQuotaRealSpec struct {
