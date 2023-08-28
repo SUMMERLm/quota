@@ -59,6 +59,8 @@ type QuotaSpec struct {
 	// +optional
 	PodQpsReal []PodQpsQuotaRealSpec `json:"podQpsReal,omitempty"`
 	// +optional
+	ChildClusterState []ChildClusterState `json:"childClusterState,omitempty"`
+	// +optional
 	PodQpsIncreaseOrDecrease []PodQpsIncreaseOrDecreaseSpec `json:"podQpsIncreaseOrDecrease,omitempty"`
 }
 
@@ -97,6 +99,19 @@ type PodQpsIncreaseOrDecreaseSpec struct {
 	PodName string `json:"podName,omitempty"`
 	// +optional
 	QpsIncreaseOrDecrease int `json:"qpsIncreaseOrDecrease,omitempty"`
+}
+
+type ChildClusterState struct {
+	// +optional
+	ClusterName string `json:"clusterName,omitempty"`
+	// +optional
+	ClusterState string `json:"clusterState,omitempty"`
+	// +optional
+	Quota int `json:"quota,omitempty"`
+	// +optional
+	QuotaRequire int `json:"quotaRequire,omitempty"`
+	// +optional
+	QuotaRemain int `json:"quotaRemain,omitempty"`
 }
 
 //+kubebuilder:object:root=true

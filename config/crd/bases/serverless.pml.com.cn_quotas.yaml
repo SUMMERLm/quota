@@ -44,6 +44,21 @@ spec:
                       type: string
                   type: object
                 type: array
+              childClusterState:
+                items:
+                  properties:
+                    clusterName:
+                      type: string
+                    clusterState:
+                      type: string
+                    quota:
+                      type: integer
+                    quotaRemain:
+                      type: integer
+                    quotaRequire:
+                      type: integer
+                  type: object
+                type: array
               childName:
                 items:
                   type: string
